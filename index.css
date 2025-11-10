@@ -1,0 +1,209 @@
+/* ===========================
+   Base / Reset
+=========================== */
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #0f172a;          /* slate-900 */
+  --card: #0b1223;        /* azul bem escuro */
+  --muted: #94a3b8;       /* slate-400 */
+  --text: #e2e8f0;        /* slate-200 */
+  --primary: #6366f1;     /* indigo-500 */
+  --primary-700: #4f46e5; /* indigo-600 */
+  --ring: rgba(99, 102, 241, 0.35);
+  --border: rgba(148, 163, 184, 0.15);
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  background:
+    radial-gradient(1000px 500px at 10% -10%, rgba(99,102,241,0.20), transparent 60%),
+    radial-gradient(900px 400px at 110% 20%, rgba(59,130,246,0.18), transparent 60%),
+    linear-gradient(180deg, #0b1020, #0b1223 35%, #0f172a);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===========================
+   Layout do Container / Card
+=========================== */
+.container {
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.content {
+  width: 100%;
+  max-width: 420px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px;
+  position: relative;
+  box-shadow:
+    0 10px 25px rgba(0,0,0,0.35),
+    inset 0 1px 0 rgba(255,255,255,0.03);
+  backdrop-filter: blur(6px);
+}
+
+/* Âncoras técnicas (não exibem) */
+.links {
+  display: none;
+}
+
+/* ===========================
+   Títulos / Textos
+=========================== */
+h1 {
+  margin: 0 0 16px;
+  font-size: 1.5rem;
+  letter-spacing: 0.3px;
+}
+
+p {
+  margin: 0 0 14px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+p.link {
+  margin-top: 12px;
+  font-size: 0.95rem;
+}
+
+/* ===========================
+   Inputs / Botões
+=========================== */
+label {
+  display: block;
+  margin-bottom: 6px;
+  color: #cbd5e1; /* slate-300 */
+  font-size: 0.9rem;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: rgba(2, 6, 23, 0.6);
+  color: var(--text);
+  outline: none;
+  transition: border-color .18s ease, box-shadow .18s ease, transform .06s ease;
+}
+
+input[type="text"]::placeholder,
+input[type="email"]::placeholder,
+input[type="password"]::placeholder {
+  color: #7c88a1; /* slate-500-ish */
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px var(--ring);
+}
+
+input[type="submit"] {
+  width: 100%;
+  border: 0;
+  cursor: pointer;
+  padding: 12px 14px;
+  margin-top: 6px;
+  border-radius: 10px;
+  background: linear-gradient(180deg, var(--primary), var(--primary-700));
+  color: white;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  transition: transform .06s ease, filter .15s ease, box-shadow .15s ease;
+  box-shadow: 0 6px 20px rgba(99,102,241,0.28);
+}
+
+input[type="submit"]:hover {
+  filter: brightness(1.05);
+}
+
+input[type="submit"]:active {
+  transform: translateY(1px);
+}
+
+/* Checkbox + label lado a lado */
+#manterlogado {
+  accent-color: var(--primary);
+  transform: translateY(1px);
+}
+
+p:has(#manterlogado) {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #cbd5e1;
+}
+
+/* Links de alternância */
+a {
+  color: #a5b4fc; /* indigo-300 */
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* ===========================
+   Telas (Login/Cadastro)
+   — padrão: mostra login
+=========================== */
+.content #login,
+.content #cadastro {
+  display: none;
+  animation: fadeIn .28s ease both;
+}
+
+.content #login { display: block; }
+
+/* Quando alvo é #paracadastro → mostra cadastro */
+#paracadastro:target ~ .content #login { display: none; }
+#paracadastro:target ~ .content #cadastro { display: block; }
+
+/* Quando alvo é #paralogin → mostra login */
+#paralogin:target ~ .content #login { display: block; }
+#paralogin:target ~ .content #cadastro { display: none; }
+
+/* ===========================
+   Micro animação
+=========================== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.995);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ===========================
+   Responsivo
+=========================== */
+@media (max-width: 420px) {
+  .content {
+    padding: 22px;
+    border-radius: 14px;
+  }
+  h1 { font-size: 1.35rem; }
+}
